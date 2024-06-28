@@ -16,10 +16,11 @@ type
       destructor Destroy; override;
       class function New : iController;
       function Entitys : iModelEntityFactory;
-      function Connect(aDataBase, aServer, aUserName, aPassword : String) : iModelConnectionFactory;
+      function Connect : iModelConnectionFactory;
       function Connected : Boolean;
       function Connection : iModelConnection;
       function TypeConnection : iModelConnectionFactory;
+      //function GetDAO : iModelDAOFactory;
   end;
 
 implementation
@@ -29,9 +30,9 @@ uses
 
 { TController }
 
-function TController.Connect(aDataBase, aServer, aUserName, aPassword : String): iModelConnectionFactory;
+function TController.Connect: iModelConnectionFactory;
 begin
-  FConnection := TModelConnectionFactory.New(aDataBase, aServer, aUserName, aPassword);
+  FConnection := TModelConnectionFactory.New;
   Result := FConnection;
 end;
 

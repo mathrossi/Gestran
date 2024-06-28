@@ -119,6 +119,17 @@
         <DCCReference Include="Model\Entity\Gestran.Model.Entity.Factory.pas"/>
         <DCCReference Include="Model\Entity\Gestran.Model.Entity.Interfaces.pas"/>
         <DCCReference Include="Model\Entity\Gestran.Model.Entity.pas"/>
+        <DCCReference Include="Model\DAO\Gestran.DAO.Factory.pas"/>
+        <DCCReference Include="DM\DM.Report.pas">
+            <Form>DMReport</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <RcItem Include="Report\Report.Vendas.fr3">
+            <ContainerId>ResourceItem</ContainerId>
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>ReportVendas</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -147,7 +158,13 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="Win32\Debug\Gestran.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Report\Report.Vendas.fr3" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\bin\Gestran.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Gestran.exe</RemoteName>
                         <Overwrite>true</Overwrite>

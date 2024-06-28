@@ -12,9 +12,9 @@ type
       FConnection : iModelConnection;
       procedure TesteConnection;
     public
-      constructor Create(aDataBase, aServer, aUserName, aPassword : String);
+      constructor Create;
       destructor Destroy; override;
-      class function New(aDataBase, aServer, aUserName, aPassword : String) : iModelConnectionFactory;
+      class function New : iModelConnectionFactory;
       function Connected : Boolean;
       function Query : iModelQuery;
       function TypeConnection : TTypeConnection;
@@ -39,10 +39,10 @@ begin
   Result := FConnection.Connected;
 end;
 
-constructor TModelConnectionFactory.Create(aDataBase, aServer, aUserName, aPassword : String);
+constructor TModelConnectionFactory.Create;
 begin
   FTypeConnection := tpFiredac;
-  FConnection := TModelConnectionFiredacConnection.New(aDataBase, aServer, aUserName, aPassword);
+  FConnection := TModelConnectionFiredacConnection.New;
 end;
 
 destructor TModelConnectionFactory.Destroy;
@@ -51,9 +51,9 @@ begin
   inherited;
 end;
 
-class function TModelConnectionFactory.New(aDataBase, aServer, aUserName, aPassword : String) : iModelConnectionFactory;
+class function TModelConnectionFactory.New: iModelConnectionFactory;
 begin
-  Result := Self.Create(aDataBase, aServer, aUserName, aPassword);
+  Result := Self.Create;
 end;
 
 function TModelConnectionFactory.Query: iModelQuery;

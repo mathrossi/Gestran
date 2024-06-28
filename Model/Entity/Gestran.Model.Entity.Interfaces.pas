@@ -4,7 +4,7 @@ interface
 
 uses
   Data.DB, Gestran.Model.Connection.Interfaces, System.Classes,
-  System.Generics.Collections;
+  System.Generics.Collections, FireDAC.Comp.Client;
 
 type
   TTypeCRUD = (tpCreate, tpRead, tpUpdate, tpDelete, tpSQL);
@@ -18,6 +18,8 @@ type
     function RecordCount : Integer;
     function ApplyUpdates : integer;
     function CommitUpdates : iModelEntity;
+    function Close : iModelQuery;
+    function CloneQuery : TFDQuery;
   end;
 
   iModelEntityFactory = interface

@@ -15,6 +15,11 @@ type
     aFiltros : TDictionary<String , String>) : iDAO;
   end;
 
+  iDAOFactory = interface
+    ['{8A289148-93F0-4EC9-845C-4C54518FF8A4}']
+    function GetDAO : iDAO;
+  end;
+
 implementation
 
 end.

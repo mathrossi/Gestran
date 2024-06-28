@@ -3,7 +3,7 @@ unit Gestran.Model.Connection.Interfaces;
 interface
 
 uses
-  Data.DB;
+  Data.DB, FireDAC.Comp.Client;
 
 type
   TTypeConnection = (tpFiredac, tpRestDW);
@@ -21,12 +21,13 @@ type
 
   iModelQuery = interface
     ['{8DD288AE-FF43-4C0E-858E-44132CD9D4D6}']
-    function Query : TObject;
+    function Query : TFDQuery;
     function Open(aTable, aSQL : String) : iModelQuery;
     function ExecSQL(aSQL : String) : iModelQuery;
     function RecordCount : Integer;
     function ApplyUpdates : integer;
     function CommitUpdates : iModelQuery;
+    function Close : iModelQuery;
   end;
 
   iModelConnectionFactory = interface

@@ -1,5 +1,7 @@
 program Gestran;
 
+{$R *.dres}
+
 uses
   Vcl.Forms,
   Gestran.View.Principal in 'View\Gestran.View.Principal.pas' {PrincipalForm},
@@ -14,7 +16,9 @@ uses
   Gestran.DAO in 'Model\DAO\Gestran.DAO.pas',
   Gestran.Model.Entity.Factory in 'Model\Entity\Gestran.Model.Entity.Factory.pas',
   Gestran.Model.Entity.Interfaces in 'Model\Entity\Gestran.Model.Entity.Interfaces.pas',
-  Gestran.Model.Entity in 'Model\Entity\Gestran.Model.Entity.pas';
+  Gestran.Model.Entity in 'Model\Entity\Gestran.Model.Entity.pas',
+  Gestran.DAO.Factory in 'Model\DAO\Gestran.DAO.Factory.pas',
+  DM.Report in 'DM\DM.Report.pas' {DMReport: TDataModule};
 
 {$R *.res}
 
@@ -22,5 +26,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TPrincipalForm, PrincipalForm);
+  Application.CreateForm(TDMReport, DMReport);
   Application.Run;
 end.

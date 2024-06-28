@@ -17,9 +17,9 @@ type
     FDManager: TFDManager;
     procedure ConfigDB;
   public
-    constructor Create(aDataBase, aServer, aUserName, aPassword: String);
+    constructor Create;
     destructor Destroy; override;
-    class function New(aDataBase, aServer, aUserName, aPassword: String): iModelConnection;
+    class function New: iModelConnection;
     function Connection: TObject;
     function Connected: Boolean;
     function Commit: iModelConnection;
@@ -36,12 +36,18 @@ uses
 
 { TModelConnectionFiredacConnection }
 
-constructor TModelConnectionFiredacConnection.Create(aDataBase, aServer, aUserName, aPassword: String);
+constructor TModelConnectionFiredacConnection.Create;
 begin
   ConfigDB;
   FMSSQLDriverLink := TFDPhysMSSQLDriverLink.Create(nil);
   FConnection := TFDConnection.Create(nil);
   FConnection.ConnectionDefName := 'Gestran';
+  FConnection.TxOptions.AutoStart := True;
+  FConnection.TxOptions.Isolation := xiReadCommitted;
+  FConnection.TxOptions.AutoCommit := True;
+  FConnection.UpdateOptions.RefreshMode := rmAll;
+  FConnection.FetchOptions.Mode := fmAll;
+  FConnection.ResourceOptions.SilentMode := True;
   FConnection.LoginPrompt := False;
   try
     FConnection.Connected := true;
@@ -57,10 +63,9 @@ begin
   inherited;
 end;
 
-class function TModelConnectionFiredacConnection.New(aDataBase, aServer, aUserName, aPassword: String)
-  : iModelConnection;
+class function TModelConnectionFiredacConnection.New : iModelConnection;
 begin
-  Result := Self.Create(aDataBase, aServer, aUserName, aPassword);
+  Result := Self.Create;
 end;
 
 function TModelConnectionFiredacConnection.Rollback: iModelConnection;
